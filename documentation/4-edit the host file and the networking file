@@ -1,0 +1,9 @@
+vi /etc/hosts
+
+1.2.3.4 <fully.qualified.domain.name>
+
+
+vi /etc/sysconfig/network
+
+NETWORKING=yes
+HOSTNAME=<fully.qualified.domain.name>
