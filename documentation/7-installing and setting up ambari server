@@ -1,0 +1,2 @@
+yum install ambari-server
+ambari-server setup
