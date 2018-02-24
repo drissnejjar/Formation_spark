@@ -6,7 +6,13 @@
 
     <groupId>Formation_spark</groupId>
     <artifactId>Formation_spark</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>sparkActions</module>
+        <module>uber_use_case</module>
+        <module>sparkTransformations</module>
+    </modules>
 
 
 </project>

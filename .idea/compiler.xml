@@ -6,11 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Formation_spark" />
+        <module name="sparkActions" />
+        <module name="sparkTransformations" />
+        <module name="uber_use_case" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Formation_spark" target="1.5" />
+      <module name="sparkActions" target="1.5" />
+      <module name="sparkTransformations" target="1.5" />
+      <module name="uber_use_case" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
