@@ -1,6 +1,15 @@
+package Formation_spark.uber_use_case
+
+class Configuration {
+
+  def parseResources(resourcesPath: String): String = {
+    getClass.getResource(resourcesPath).getPath
+  }
+}
 
 
 /*
+
 def loadConf(pathToConf: String): Config = {
   val path = new Path(pathToConf)
   val confFile = File.createTempFile(path.getName, "tmp")

@@ -1,6 +1,6 @@
+package Formation_spark.uber_use_case
 
 import scala.io.Source
-
 import org.apache.spark._
 import org.apache.spark.sql.{Dataset, SQLContext, SparkSession}
 import org.apache.spark.sql.types._
@@ -8,76 +8,89 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.ml.feature.VectorAssembler
 import org.apache.spark.ml.clustering.KMeans
 
-object parseDataSet {
+
+object parseDataSet extends Configuration  {
 
   case class Uber(dt: String, lat: Double, lon: Double, base: String) extends Serializable
 
-    def main(args: Array[String]) {
+  def main(args: Array[String]) {
 
-      val resourcesPath = getClass.getResource("/uber.csv").getPath
-      println("uber path: " + resourcesPath)
+    val input = parseResources("/uber.csv")
 
-      val spark: SparkSession = SparkSession.builder()
-        .master("local")
-        .appName("uber")
-        .getOrCreate()
+    val spark: SparkSession = SparkSession.builder()
+      .master("local")
+      .appName("uber")
+      .getOrCreate()
 
-      import spark.implicits._
+    import spark.implicits._
 
-      val schema = StructType(Array(
-        StructField("dt", TimestampType, true),
-        StructField("lat", DoubleType, true),
-        StructField("lon", DoubleType, true),
-        StructField("base", StringType, true)
-      ))
-
+    val schema = StructType(Array(
+      StructField("dt", TimestampType, true),
+      StructField("lat", DoubleType, true),
+      StructField("lon", DoubleType, true),
+      StructField("base", StringType, true)
+    ))
 
 
-      // Spark 2.1
-      val df: Dataset[Uber] = spark.read.option("inferSchema", "false").schema(schema).csv(resourcesPath).as[Uber]
 
-      df.cache
-      df.show
-      df.schema
+    // Spark 2.1
+    val df: Dataset[Uber] = spark.read.option("inferSchema", "false").schema(schema).csv(input).as[Uber]
 
-      val featureCols = Array("lat", "lon")
-      val assembler = new VectorAssembler().setInputCols(featureCols).setOutputCol("features")
-      val df2 = assembler.transform(df)
-      val Array(trainingData, testData) = df2.randomSplit(Array(0.7, 0.3), 5043)
 
-      // increase the iterations if running on a cluster (this runs on a 1 node sandbox)
-      val kmeans = new KMeans().setK(20).setFeaturesCol("features").setMaxIter(5)
-      val model = kmeans.fit(trainingData)
-      println("Final Centers: ")
-      model.clusterCenters.foreach(println)
+    df.cache
+    df.show
+    df.schema
 
-      val categories = model.transform(testData)
+    val featureCols = Array("lat", "lon")
+    val assembler = new VectorAssembler().setInputCols(featureCols).setOutputCol("features")
+    val df2 = assembler.transform(df)
+    val Array(trainingData, testData) = df2.randomSplit(Array(0.7, 0.3), 5043)
 
-      categories.show
-      categories.createOrReplaceTempView("uber")
+    // increase the iterations if running on a cluster (this runs on a 1 node sandbox)
+    val kmeans = new KMeans().setK(20).setFeaturesCol("features").setMaxIter(5)
+    val model = kmeans.fit(trainingData)
+    println("Final Centers: ")
+    model.clusterCenters.foreach(println)
 
-      categories.select(month($"dt").alias("month"), dayofmonth($"dt").alias("day"), hour($"dt").alias("hour"), $"prediction").groupBy("month", "day", "hour", "prediction").agg(count("prediction").alias("count")).orderBy("day", "hour", "prediction").show
+    val categories = model.transform(testData)
 
-      categories.select(hour($"dt").alias("hour"), $"prediction").groupBy("hour", "prediction").agg(count("prediction")
-        .alias("count")).orderBy(desc("count")).show
+    categories.show
+    categories.createOrReplaceTempView("uber")
 
-      categories.groupBy("prediction").count().show()
+    categories.select(month($"dt").alias("month"), dayofmonth($"dt").alias("day"), hour($"dt").alias("hour"), $"prediction").groupBy("month", "day", "hour", "prediction").agg(count("prediction").alias("count")).orderBy("day", "hour", "prediction").show
 
-      spark.sql("select prediction, count(prediction) as count from uber group by prediction").show
+    categories.select(hour($"dt").alias("hour"), $"prediction").groupBy("hour", "prediction").agg(count("prediction")
+      .alias("count")).orderBy(desc("count")).show
 
-      spark.sql("SELECT hour(uber.dt) as hr,count(prediction) as ct FROM uber group By hour(uber.dt)").show
+    categories.groupBy("prediction").count().show()
 
-      /*
-       * uncomment below for various functionality:
-      */
-      // to save the model
-      model.write.overwrite().save("/Users/drissnejjar/IdeaProjects/Formation_spark/uber_use_case/output/savemodel")
-      // model can be  re-loaded like this
-      // val sameModel = KMeansModel.load("/user/user01/data/savemodel")
-      //
-      // to save the categories dataframe as json data
-      val res = spark.sql("select dt, lat, lon, base, prediction as cid FROM uber order by dt")
-      res.write.format("json").save("/Users/drissnejjar/IdeaProjects/Formation_spark/uber_use_case/output/uber.json")
+    spark.sql("select prediction, count(prediction) as count from uber group by prediction").show
+
+    spark.sql("SELECT hour(uber.dt) as hr,count(prediction) as ct FROM uber group By hour(uber.dt)").show
+
+    /*
+     * uncomment below for various functionality:
+    */
+    // to save the model
+    val saveModel = "/Users/drissnejjar/IdeaProjects/Formation_spark/uber_use_case/output/savemodel"
+    val uberJson = "/Users/drissnejjar/IdeaProjects/Formation_spark/uber_use_case/output/uber.json"
+    val res = spark.sql("select dt, lat, lon, base, prediction as cid FROM uber order by dt")
+
+    try{
+      model.write.overwrite().save(saveModel)
+      res.write.format("json").save(uberJson)
     }
+    catch {
+      case ae : sql.AnalysisException => println ("File already exists")
+    }
+
+
+    // model can be  re-loaded like this
+    // val sameModel = KMeansModel.load("/user/user01/data/savemodel")
+    //
+    // to save the categories dataframe as json data
+
+
   }
+}
 
