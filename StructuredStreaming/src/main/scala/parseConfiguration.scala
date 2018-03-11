@@ -1,4 +1,4 @@
-package Formation_spark.uber_use_case
+package Formation_spark.StructuredStreaming
 
 class parseConfiguration {
 
