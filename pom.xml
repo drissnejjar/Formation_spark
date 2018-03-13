@@ -14,6 +14,7 @@
         <module>sparkTransformations</module>
         <module>StructuredStreaming</module>
         <module>SparkStreaming</module>
+        <module>sqlLiteConnection</module>
     </modules>
 
 
