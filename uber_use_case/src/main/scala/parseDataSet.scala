@@ -37,7 +37,7 @@ object parseDataSet extends parseConfiguration  {
 
     df.cache
     df.show
-    df.schema
+    df.printSchema
 
     val featureCols = Array("lat", "lon")
     val assembler = new VectorAssembler().setInputCols(featureCols).setOutputCol("features")
