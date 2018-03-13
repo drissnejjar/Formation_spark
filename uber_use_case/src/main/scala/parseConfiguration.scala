@@ -1,6 +1,6 @@
 package Formation_spark.uber_use_case
 
-class Configuration {
+class parseConfiguration {
 
   def parseResources(resourcesPath: String): String = {
     getClass.getResource(resourcesPath).getPath
