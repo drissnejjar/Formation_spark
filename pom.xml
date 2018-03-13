@@ -12,6 +12,9 @@
         <module>sparkActions</module>
         <module>uber_use_case</module>
         <module>sparkTransformations</module>
+        <module>StructuredStreaming</module>
+        <module>SparkStreaming</module>
+        <module>sqlLiteConnection</module>
     </modules>
 
 

@@ -1,15 +1,13 @@
-package Formation_spark.uber_use_case
-
-import scala.io.Source
+import Formation_spark.uber_use_case.parseConfiguration
 import org.apache.spark._
-import org.apache.spark.sql.{Dataset, SQLContext, SparkSession}
-import org.apache.spark.sql.types._
-import org.apache.spark.sql.functions._
-import org.apache.spark.ml.feature.VectorAssembler
 import org.apache.spark.ml.clustering.KMeans
+import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types._
+import org.apache.spark.sql.{Dataset, SparkSession}
 
 
-object parseDataSet extends Configuration  {
+object parseDataSet extends parseConfiguration  {
 
   case class Uber(dt: String, lat: Double, lon: Double, base: String) extends Serializable
 
@@ -39,7 +37,7 @@ object parseDataSet extends Configuration  {
 
     df.cache
     df.show
-    df.schema
+    df.printSchema
 
     val featureCols = Array("lat", "lon")
     val assembler = new VectorAssembler().setInputCols(featureCols).setOutputCol("features")
