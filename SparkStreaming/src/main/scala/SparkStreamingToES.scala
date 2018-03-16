@@ -11,15 +11,20 @@ object SparkStreamingToES {
     //All Configuration declar here
     val conf = new SparkConf()
       .setAppName("kafkawordcount")
-      .setMaster("local")
+
     val sc = new SparkContext(conf)
+      sc.setLogLevel("ALL")
     val sqlContext = new SQLContext(sc)
 
     //Declare all the Configs here
-    val kafkaTopics = "wordcounttopic"    // command separated list of topics
-    val kafkaBrokers = "localhost:9092"   // comma separated list of broker:host
+    val localKafkaTopics = "localwordcounttopic"    // command separated list of topics
+    val localKafkaBrokers = "localhost:9092"   // comma separated list of broker:host
     val batchIntervalSeconds = 5
-    val checkpointDir = "/usr/local/Cellar/kafka/1.0.0/checkpoint/" //create a checkpoint directory to periodically persist the data
+    val localCheckpointDir = "/usr/local/Cellar/kafka/1.0.0/checkpoint/" //create a checkpoint directory to periodically persist the data
+
+    val kafkaTopics = args(0)
+    val kafkaBrokers = args(1)
+    val checkpointDir = args(2)
 
     //If any Spark Streaming Context is present, it kills and launches a new ssc
     val stopActiveContext = true
@@ -30,7 +35,10 @@ object SparkStreamingToES {
     //Create Kafka Stream with the Required Broker and Topic
     def kafkaConsumeStream(ssc: StreamingContext): DStream[(String, String)] = {
       val topicsSet = kafkaTopics.split(",").toSet
-      val kafkaParams = Map[String, String]("metadata.broker.list" -> kafkaBrokers)
+      val kafkaParams = Map[String, String](
+        "metadata.broker.list" -> kafkaBrokers,
+        "auto.create.topics.enable" -> "true"
+      )
       KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](
         ssc, kafkaParams, topicsSet)
     }
