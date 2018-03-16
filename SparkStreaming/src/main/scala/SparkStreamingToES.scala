@@ -5,7 +5,7 @@ import org.apache.spark.streaming.kafka.KafkaUtils
 import org.apache.spark.streaming.{Minutes, Seconds, StreamingContext}
 import org.apache.spark.{SparkConf, SparkContext}
 
-object KafkaSparkStreamingToES {
+object SparkStreamingToES {
   def main(args: Array[String]) {
 
     //All Configuration declar here
@@ -18,7 +18,7 @@ object KafkaSparkStreamingToES {
     //Declare all the Configs here
     val kafkaTopics = "wordcounttopic"    // command separated list of topics
     val kafkaBrokers = "localhost:9092"   // comma separated list of broker:host
-    val batchIntervalSeconds = 20
+    val batchIntervalSeconds = 5
     val checkpointDir = "/usr/local/Cellar/kafka/1.0.0/checkpoint/" //create a checkpoint directory to periodically persist the data
 
     //If any Spark Streaming Context is present, it kills and launches a new ssc
@@ -60,7 +60,7 @@ object KafkaSparkStreamingToES {
 
       //Index the Word, Count attributes to ElasticSearch Index. You don't need to create any index in Elastic Search
       import org.elasticsearch.spark.sql._
-      wordCountdf.saveToEs("kafkawordcount_v1/kwc")
+      wordCountdf.saveToEs("kafkawordcount_v2/kwc")
     }
 
     // To make sure data is not deleted by the time we query it interactively

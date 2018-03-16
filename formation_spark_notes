@@ -20,9 +20,10 @@ val purchaseByCustomerPerHour = streamingDataFrame.selectExpr("CustomerId","(Uni
 
 spark.conf.set("spark.sql.shuffle.partitions", "5") 
 
-purchaseByCustomerPerHour.writeStream.format("memory").queryName("customer_purchases").outputMode("complete").start()
+purchaseByCustomerPerHour.writeStream.format("memory").queryName("customer_purchases").outputMode("update").start()
 
-spark.sql(""" SELECT * FROM customer_purchases ORDER BY `sum(total_cost)` DESC """).show(5)
+spark.sql(""" SELECT * FROM customer_purchases where CustomerId = '18102.0' """).show(100)
+spark.sql(""" SELECT * FROM customer_purchases ORDER BY `sum(total_cost)` DESC """).show
 
 purchaseByCustomerPerHour.writeStream.format("console").queryName("customer_purchases").outputMode("complete").start()
 
