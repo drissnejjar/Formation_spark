@@ -13,13 +13,23 @@ object parseDataSet extends parseConfiguration  {
 
   def main(args: Array[String]) {
 
+   def parseResources(resourcesPath: String): String = {
+     getClass.getResource(resourcesPath).getPath
+   }
+
+
     val input = parseResources("/uber.csv")
+    val hadoop_input = args(0)
 
     val spark: SparkSession = SparkSession.builder()
-      .master("local")
       .appName("uber")
-      .getOrCreate()
+      .config("spark.hadoop.yarn.resourcemanager.hostname","vps493710.ovh.net")
+      .config("spark.hadoop.yarn.resourcemanager.address", "vps493710.ovh.net:8050")
+       // .config("spark.yarn.access.namenodes", "hdfs://XXXX:8020,hdfs://XXXX:8020")
+     // .config("spark.yarn.access.namenodes", "hdfs://XXXX:8020,hdfs://XXXX:8020")
 
+
+      .getOrCreate()
     import spark.implicits._
 
     val schema = StructType(Array(
@@ -32,7 +42,13 @@ object parseDataSet extends parseConfiguration  {
 
 
     // Spark 2.1
-    val df: Dataset[Uber] = spark.read.option("inferSchema", "false").schema(schema).csv(input).as[Uber]
+    val df: Dataset[Uber] = spark.read
+      .option("inferSchema", "false")
+      .schema(schema)
+      .option("header",true)
+      .option("timestampFormat","yyyy/MM/dd HH:mm:ss")
+      .csv(input)
+      .as[Uber]
 
 
     df.cache

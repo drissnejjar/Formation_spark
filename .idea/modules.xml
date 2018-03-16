@@ -3,9 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Formation_spark.iml" filepath="$PROJECT_DIR$/Formation_spark.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SparkStreaming/SparkStreaming.iml" filepath="$PROJECT_DIR$/SparkStreaming/SparkStreaming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StructuredStreaming/StructuredStreaming.iml" filepath="$PROJECT_DIR$/StructuredStreaming/StructuredStreaming.iml" />
       <module fileurl="file://$PROJECT_DIR$/sparkActions/sparkActions.iml" filepath="$PROJECT_DIR$/sparkActions/sparkActions.iml" />
       <module fileurl="file://$PROJECT_DIR$/sparkTransformations/sparkTransformations.iml" filepath="$PROJECT_DIR$/sparkTransformations/sparkTransformations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sqlLiteConnection/sqlLiteConnection.iml" filepath="$PROJECT_DIR$/sqlLiteConnection/sqlLiteConnection.iml" />
       <module fileurl="file://$PROJECT_DIR$/uber_use_case/uber_use_case.iml" filepath="$PROJECT_DIR$/uber_use_case/uber_use_case.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wordCountExample/wordCountExample.iml" filepath="$PROJECT_DIR$/wordCountExample/wordCountExample.iml" />
     </modules>
   </component>
 </project>
