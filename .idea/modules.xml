@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Formation_spark.iml" filepath="$PROJECT_DIR$/Formation_spark.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SparkStreaming/SparkStreaming.iml" filepath="$PROJECT_DIR$/SparkStreaming/SparkStreaming.iml" />
       <module fileurl="file://$PROJECT_DIR$/StructuredStreaming/StructuredStreaming.iml" filepath="$PROJECT_DIR$/StructuredStreaming/StructuredStreaming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spark-elastic-streaming-kibana/spark-elastic-streaming-kibana.iml" filepath="$PROJECT_DIR$/spark-elastic-streaming-kibana/spark-elastic-streaming-kibana.iml" />
       <module fileurl="file://$PROJECT_DIR$/sparkActions/sparkActions.iml" filepath="$PROJECT_DIR$/sparkActions/sparkActions.iml" />
       <module fileurl="file://$PROJECT_DIR$/sparkTransformations/sparkTransformations.iml" filepath="$PROJECT_DIR$/sparkTransformations/sparkTransformations.iml" />
       <module fileurl="file://$PROJECT_DIR$/sqlLiteConnection/sqlLiteConnection.iml" filepath="$PROJECT_DIR$/sqlLiteConnection/sqlLiteConnection.iml" />

@@ -1,6 +1,6 @@
-# Formation_spark
+#Formation_spark
 
-The aim of this project is to share the material to start using Spark/scala
+The aim of this project is to share the material to start using Spark 1.6 and 2 in scala
 
 ###local[*]
 
@@ -26,3 +26,23 @@ In this mode, although the driver program is running on the client machine, the 
     --master yarn --deploy-mode cluster
 This is the most advisable pattern for executing/submitting your spark jobs in production
 Yarn cluster mode: Your driver program is running on the cluster master machine where you type the command to submit the spark application
+
+#HDP pre-installation configuration
+
+The aime of this part is to prepare a centOs cluster for HDP installation. This is based on the configuration document given by HortonWorks
+
+##Enable HTTPD
+
+These are the commands to enable httpd
+
+    sudo yum install httpd –y
+    firewall-cmd --permanent --add-port=443/tcp
+    firewall-cmd --permanent --add-port=80/tcp
+    firewall-cmd --reload
+    systemctl start httpd
+    systemctl enable httpd
+    reboot
+    
+
+##Password-less ssh
+

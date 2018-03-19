@@ -80,6 +80,6 @@ object SparkStreamingToES {
     ssc.start()
 
     // This is to ensure that we wait for some time before the background streaming job starts. This will put this cell on hold for 5 times the batchIntervalSeconds.
-    ssc.awaitTerminationOrTimeout(batchIntervalSeconds * 5 * 1000)
+    ssc.awaitTerminationOrTimeout(-1)
   }
 }
