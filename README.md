@@ -31,7 +31,7 @@ Yarn cluster mode: Your driver program is running on the cluster master machine 
 
 The aime of this part is to prepare a centOs cluster for HDP installation. This is based on the configuration document given by HortonWorks
 
-##Enable HTTPD
+##1- Enable HTTPD
 
 These are the commands to enable httpd
 
@@ -44,5 +44,71 @@ These are the commands to enable httpd
     reboot
     
 
-##Password-less ssh
+##2- Password-less ssh
+    
+    target=vps493708.ovh.net
+    
+On the hosts
+
+    ssh-keygen
+    
+    cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+    
+    scp -r /root/.ssh* ${target}:/root/
+    
+On the target hosts
+
+    chmod 700 /root/.ssh
+    chmod 600 /root/.ssh/authorized_keys
+    
+No password must be asked !
+
+    ssh vps493709.ovh.net
+    
+##3- Enable ntp
+
+    yum install -y ntp
+    systemctl enable ntpd
+    
+##4- Edit the host file and the networking file
+
+    vi /etc/hosts
+    
+        1.2.3.4 <fully.qualified.domain.name>
+    
+On each host
+    
+    vi /etc/sysconfig/network
+    
+        NETWORKING=yes
+        HOSTNAME=vps493707.ovh.net
+        
+##5- Configuring iptables
+
+    systemctl disable firewalld
+    service firewalld stop
+    
+    setenforce 0
+    
+##6- Downloading ambary repository
+    
+Install wget
+
+    yum install wget
+    
+Download ambari repo
+
+    wget -nv http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.6.1.3/ambari.repo -O /etc/yum.repos.d/ambari.repo
+    
+Check if ambari is in the repo
+
+    yum repolist
+    
+##7- Installing and setting up ambari server
+    
+    yum install ambari-server
+    ambari-server setup
+
+
+
 

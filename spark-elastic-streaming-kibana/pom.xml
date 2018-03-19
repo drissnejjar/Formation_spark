@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>SparkStreaming</artifactId>
+    <artifactId>spark-elastic-streaming-kibana</artifactId>
     <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka -->
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql -->
