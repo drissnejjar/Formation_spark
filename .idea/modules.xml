@@ -3,12 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Formation_spark.iml" filepath="$PROJECT_DIR$/Formation_spark.iml" />
-      <module fileurl="file://$PROJECT_DIR$/spark-actions/sparkActions.iml" filepath="$PROJECT_DIR$/spark-actions/sparkActions.iml" />
       <module fileurl="file://$PROJECT_DIR$/spark-elastic-streaming-kibana/SparkStreaming.iml" filepath="$PROJECT_DIR$/spark-elastic-streaming-kibana/SparkStreaming.iml" />
       <module fileurl="file://$PROJECT_DIR$/spark-structured-streaming/spark-structured-streaming.iml" filepath="$PROJECT_DIR$/spark-structured-streaming/spark-structured-streaming.iml" />
       <module fileurl="file://$PROJECT_DIR$/spark-transformations/spark-transformations.iml" filepath="$PROJECT_DIR$/spark-transformations/spark-transformations.iml" />
       <module fileurl="file://$PROJECT_DIR$/spark-uber-use-case/spark-uber-use-case.iml" filepath="$PROJECT_DIR$/spark-uber-use-case/spark-uber-use-case.iml" />
       <module fileurl="file://$PROJECT_DIR$/spark-word-count-example/spark-word-count-example.iml" filepath="$PROJECT_DIR$/spark-word-count-example/spark-word-count-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spark-actions/sparkActions.iml" filepath="$PROJECT_DIR$/spark-actions/sparkActions.iml" />
     </modules>
   </component>
 </project>

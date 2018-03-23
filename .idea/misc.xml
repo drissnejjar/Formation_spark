@@ -6,6 +6,10 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/wordCountExample/pom.xml" />
         <option value="$PROJECT_DIR$/spark-actions/pom.xml" />
+        <option value="$PROJECT_DIR$/spark-structured-streaming/pom.xml" />
+        <option value="$PROJECT_DIR$/spark-transformations/pom.xml" />
+        <option value="$PROJECT_DIR$/spark-uber-use-case/pom.xml" />
+        <option value="$PROJECT_DIR$/spark-word-count-example/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

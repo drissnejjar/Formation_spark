@@ -11,6 +11,7 @@
         <module name="spark-structured-streaming" />
         <module name="spark-transformations" />
         <module name="spark-uber-use-case" />
+        <module name="spark-word-count-example" />
         <module name="sparkActions" />
         <module name="SparkStreaming" />
         <module name="sparkTransformations" />
@@ -26,6 +27,7 @@
       <module name="spark-structured-streaming" target="1.5" />
       <module name="spark-transformations" target="1.5" />
       <module name="spark-uber-use-case" target="1.5" />
+      <module name="spark-word-count-example" target="1.5" />
       <module name="sparkActions" target="1.5" />
       <module name="SparkStreaming" target="1.5" />
       <module name="sparkTransformations" target="1.5" />
