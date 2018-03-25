@@ -10,11 +10,12 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>spark-actions</module>
-        <module>uber_use_case</module>
-        <module>sparkTransformations</module>
-        <module>StructuredStreaming</module>
+        <module>spark-uber-use-case</module>
+        <module>spark-transformations</module>
+        <module>spark-structured-streaming</module>
         <module>spark-elastic-streaming-kibana</module>
         <module>sqlLiteConnection</module>
+        <module>hive-jdbc-connection</module>
     </modules>
 
 
