@@ -1,5 +1,5 @@
 #Intellij Specific
-/.idea/
+.idea/
 out/
 *.ipr
 *.iws
