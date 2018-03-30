@@ -1,7 +1,9 @@
-.idea
+#Intellij Specific
 .idea/
 out/
 *.ipr
 *.iws
 *.iml
+
+#Maven Specific
 target/

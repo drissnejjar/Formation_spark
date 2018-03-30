@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Formation_spark.iml" filepath="$PROJECT_DIR$/Formation_spark.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hive-jdbc-connection/hive-jdbc-connection.iml" filepath="$PROJECT_DIR$/hive-jdbc-connection/hive-jdbc-connection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hive-reverse-udf/hive-reverse-udf.iml" filepath="$PROJECT_DIR$/hive-reverse-udf/hive-reverse-udf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mapreduce-total-passengers/mapreduce-total-passengers.iml" filepath="$PROJECT_DIR$/mapreduce-total-passengers/mapreduce-total-passengers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mapreduce-word-count/mapreduce-word-count.iml" filepath="$PROJECT_DIR$/mapreduce-word-count/mapreduce-word-count.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spark-actions/sparkActions.iml" filepath="$PROJECT_DIR$/spark-actions/sparkActions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spark-elastic-streaming-kibana/spark-elastic-streaming-kibana.iml" filepath="$PROJECT_DIR$/spark-elastic-streaming-kibana/spark-elastic-streaming-kibana.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spark-structured-streaming/spark-structured-streaming.iml" filepath="$PROJECT_DIR$/spark-structured-streaming/spark-structured-streaming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spark-transformations/spark-transformations.iml" filepath="$PROJECT_DIR$/spark-transformations/spark-transformations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spark-uber-use-case/spark-uber-use-case.iml" filepath="$PROJECT_DIR$/spark-uber-use-case/spark-uber-use-case.iml" />
+    </modules>
+  </component>
+</project>
