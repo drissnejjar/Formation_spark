@@ -1,4 +1,0 @@
-systemctl disable firewalld
-service firewalld stop
-
-setenforce 0
