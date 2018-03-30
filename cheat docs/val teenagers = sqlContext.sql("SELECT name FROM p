@@ -1,0 +1,42 @@
+val teenagers = sqlContext.sql("SELECT name FROM people_table WHERE age >= 13 AND age <= 19")
+
+hdfs dfs -rm -r /applis/people-elia.json
+echo "Truncate file"
+echo "Launch Spark simple app"
+spark-submit wordCountExample.jar /applis/structured_streaming/input/by-day/2011-12-09.csv
+
+spark-submit \
+wordCountExample.jar \
+/applis/structured_streaming/input/by-day/2011-12-09.csv \
+--executor-memory 2G \
+--master yarn \
+--deploy-mode cluster \
+--supervise
+
+
+val csvFile = spark.read.format("csv").option("header", "true").option("inferSchema","true").load("/applis/summary.csv")
+
+/applis/structured_streaming/input/by-day/2010-12-01.csv
+
+val myManualSchema = new StructType(Array( 
+new StructField("DEST_COUNTRY_NAME", StringType, true), 
+new StructField("ORIGIN_COUNTRY_NAME", StringType, true), 
+new StructField("count", LongType, false) )) 
+
+
+val csvFile_2 = spark.read.format("csv").option("header", "true").option("mode", "FAILFAST").schema(myManualSchema).load("/applis/summary.csv")
+.show(5)
+
+val staticDataFrame = spark.read.format("csv") .option("header", "true") .option("inferSchema", "true") .load("/applis/structured_streaming/input/by-day/*.csv") 
+
+staticDataFrame
+.createOrReplaceTempView("retail_data") 
+val staticSchema = staticDataFrame.schema 
+
+
+
+val streamingDataFrame = spark.readStream.schema(staticSchema).option("maxFilesPerTrigger", 1).format("csv").option("header", "true").load("/applis/structured_streaming/input/by-day/*.csv") 
+
+
+spark-submit --class streaming "/home/hdfs/StructuredStreaming-1.0-SNAPSHOT.jar" /applis/structured_streaming/input/by-day/ 
+

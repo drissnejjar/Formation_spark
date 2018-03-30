@@ -1,0 +1,10 @@
+#Intellij Specific
+.idea/
+out/
+*.ipr
+*.iws
+*.iml
+
+#Maven Specific
+target/
+/.idea/workspace.xml

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>Formation_spark</groupId>
+    <artifactId>Formation_spark</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>spark-actions</module>
+        <module>spark-uber-use-case</module>
+        <module>spark-transformations</module>
+        <module>spark-structured-streaming</module>
+        <module>spark-elastic-streaming-kibana</module>
+        <module>sqlLiteConnection</module>
+        <module>hive-jdbc-connection</module>
+        <module>mapreduce-word-count</module>
+        <module>mapreduce-total-passengers</module>
+        <module>hive-reverse-udf</module>
+    </modules>
+
+
+</project>
