@@ -1,9 +1,0 @@
-vi /etc/hosts
-
-1.2.3.4 <fully.qualified.domain.name>
-
-#On each host
-vi /etc/sysconfig/network
-
-NETWORKING=yes
-HOSTNAME=vps493707.ovh.net
