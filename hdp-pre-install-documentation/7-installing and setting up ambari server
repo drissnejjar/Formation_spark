@@ -1,2 +1,6 @@
 yum install ambari-server
 ambari-server setup
+
+ambari-server start
+
+ambari-server status

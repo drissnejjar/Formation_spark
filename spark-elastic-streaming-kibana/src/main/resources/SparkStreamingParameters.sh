@@ -12,4 +12,5 @@ $elasticLocation/elasticsearch
 
 echo 'Kafka Elasticsearch Services started'
 
-/usr/local/Cellar/kafka/1.0.0/bin/kafka-console-producer --broker-list localhost:9092 --topic wordcounttopic
+/usr/local/Cellar/kafka/1.0.0/bin/kafka-console-producer \
+--broker-list localhost:9092 --topic wordcounttopic

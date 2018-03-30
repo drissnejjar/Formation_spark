@@ -1,4 +1,5 @@
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.{SparkConf, SparkContext}
 
 object HiveJDBCConnection {
 
@@ -14,16 +15,31 @@ object HiveJDBCConnection {
     val user = "hive"
     val password = "hive"
 
+    val conf = new SparkConf()
+      .setAppName("kafkawordcount")
+      .setMaster("local[2]")
 
-    spark.read.format("jdbc").options(Map(
+    val sc = new SparkContext(conf)
+
+    val sqlContext = new org.apache.spark.sql.hive.HiveContext(sc)
+
+    sqlContext.sql("select * from retail").show
+
+    val retailHiveTable = spark.read.format("jdbc").options(Map(
       "url" -> url,
       "driver" -> driver,
       "user" -> user,
       "password" -> password,
-      "dbtable" -> "src"))
-      .load()
-      .show
+      "dbtable" -> "retail")).load
 
+
+
+    // retailHiveTable.printSchema()
+    retailHiveTable.createOrReplaceTempView("retail1")
+    // retailHiveTable.select("retail.invoiceno").show
+    // retailHiveTable.sqlContext.sql("select * from retail1")
+    // retailHiveTable.head(10)
+    spark.sql("select * from retail1").show
   }
 }
 

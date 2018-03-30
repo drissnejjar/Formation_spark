@@ -19,12 +19,13 @@ object parseDataSet extends parseConfiguration  {
 
 
     val input = parseResources("/uber.csv")
-    val hadoop_input = args(0)
+   // val hadoop_input = args(0)
 
-    val spark: SparkSession = SparkSession.builder()
+    val spark: SparkSession = SparkSession.builder().master("local[2]")
       .appName("uber")
       .config("spark.hadoop.yarn.resourcemanager.hostname","vps493710.ovh.net")
       .config("spark.hadoop.yarn.resourcemanager.address", "vps493710.ovh.net:8050")
+
        // .config("spark.yarn.access.namenodes", "hdfs://XXXX:8020,hdfs://XXXX:8020")
      // .config("spark.yarn.access.namenodes", "hdfs://XXXX:8020,hdfs://XXXX:8020")
 
@@ -59,6 +60,9 @@ object parseDataSet extends parseConfiguration  {
     val assembler = new VectorAssembler().setInputCols(featureCols).setOutputCol("features")
     val df2 = assembler.transform(df)
     val Array(trainingData, testData) = df2.randomSplit(Array(0.7, 0.3), 5043)
+
+    println("df2" + df2.show(20))
+    println("trainingData" + trainingData.show(20))
 
     // increase the iterations if running on a cluster (this runs on a 1 node sandbox)
     val kmeans = new KMeans().setK(20).setFeaturesCol("features").setMaxIter(5)

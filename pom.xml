@@ -16,6 +16,9 @@
         <module>spark-elastic-streaming-kibana</module>
         <module>sqlLiteConnection</module>
         <module>hive-jdbc-connection</module>
+        <module>mapreduce-word-count</module>
+        <module>mapreduce-total-passengers</module>
+        <module>hive-reverse-udf</module>
     </modules>
 
 

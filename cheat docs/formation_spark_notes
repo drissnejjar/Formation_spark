@@ -27,4 +27,10 @@ spark.sql(""" SELECT * FROM customer_purchases ORDER BY `sum(total_cost)` DESC "
 
 purchaseByCustomerPerHour.writeStream.format("console").queryName("customer_purchases").outputMode("complete").start()
 
+scp StructuredStreaming-1.0-SNAPSHOT.jar root@vps493710.ovh.net:/home/hdfs/
+
+sh kafka-console-producer.sh --broker-list vps493709.ovh.net:9092 --topic wordcounttopic
+
+
+
 
