@@ -1,7 +1,0 @@
-sudo yum install httpd –y
-firewall-cmd --permanent --add-port=443/tcp
-firewall-cmd --permanent --add-port=80/tcp
-firewall-cmd --reload
-systemctl start httpd
-systemctl enable httpd
-reboot
