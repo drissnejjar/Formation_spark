@@ -7,3 +7,4 @@ out/
 
 #Maven Specific
 target/
+/.idea/workspace.xml
