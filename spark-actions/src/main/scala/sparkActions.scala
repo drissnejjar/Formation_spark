@@ -6,6 +6,7 @@ object sparkActions {
 
     val conf = new SparkConf()
       .setAppName("actions")
+      .setMaster("local[*]")
     val sc = new SparkContext(conf)
 
     val x = sc.parallelize(Array("b", "a", "c"))
