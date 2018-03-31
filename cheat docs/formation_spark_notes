@@ -1,0 +1,36 @@
+val staticDataFrame = spark.read.format("csv").option("header", "true").option("inferSchema", "true").load("/applis/structured_streaming/input/by-day/*.csv") 
+
+staticDataFrame.createOrReplaceTempView("retail_data") 
+val staticSchema = staticDataFrame.schema 
+
+import org.apache.spark.sql.functions.{window, column, desc, col} 
+staticDataFrame 
+.selectExpr( "CustomerId",
+ "(UnitPrice * Quantity) as total_cost",
+ "InvoiceDate") 
+.groupBy( 
+col("CustomerId"), window(col("InvoiceDate"), "1 day")) 
+.sum("total_cost") 
+.show(5) 
+
+
+val streamingDataFrame = spark.readStream.schema(staticSchema).option("maxFilesPerTrigger", 1).format("csv").option("header", "true").load("/applis/structured_streaming/input/by-day/*.csv") 
+
+val purchaseByCustomerPerHour = streamingDataFrame.selectExpr("CustomerId","(UnitPrice * Quantity) as total_cost", "InvoiceDate").groupBy($"CustomerId", window($"InvoiceDate","1 day")).sum("total_cost") 
+
+spark.conf.set("spark.sql.shuffle.partitions", "5") 
+
+purchaseByCustomerPerHour.writeStream.format("memory").queryName("customer_purchases").outputMode("update").start()
+
+spark.sql(""" SELECT * FROM customer_purchases where CustomerId = '18102.0' """).show(100)
+spark.sql(""" SELECT * FROM customer_purchases ORDER BY `sum(total_cost)` DESC """).show
+
+purchaseByCustomerPerHour.writeStream.format("console").queryName("customer_purchases").outputMode("complete").start()
+
+scp StructuredStreaming-1.0-SNAPSHOT.jar root@vps493710.ovh.net:/home/hdfs/
+
+sh kafka-console-producer.sh --broker-list vps493709.ovh.net:9092 --topic wordcounttopic
+
+
+
+

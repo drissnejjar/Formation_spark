@@ -1,0 +1,22 @@
+	val y = x.partitionBy(new Partitioner() 
+		{	
+		val numPartitions = 2
+	def getPartition(k:Any) = {
+	if (k.asInstanceOf[Char] < 'B') 0 
+	else 1
+	}
+	}
+	)
+
+	val yOut = y.glom().collect()
+
+
+val x = sc.parallelize(Array(1,2,3))  
+
+val y = x.map(n=>n * n)
+val z = x.zip(y)
+println(z.collect().mkString(","))
+
+
+val x = sc.parallelize(Array(1,2,3), 2)  
+val y = x.max
